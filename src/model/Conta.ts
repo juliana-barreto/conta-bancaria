@@ -18,15 +18,6 @@ export class Conta{
 		this._saldo = saldo;
 	}
 
-  //Método Construtor Padrão
-  constructor() {
-    this._numero = 0;
-    this._agencia = 0;
-    this._titular = "desconhecido";
-    this._tipo = 0;
-    this._saldo = 0;
-  }
-
   // Getters e Setters
 
 	public get numero(): number {
