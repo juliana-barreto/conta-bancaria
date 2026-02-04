@@ -1,4 +1,6 @@
-# Projeto Conta Bancária
+# Projeto Conta Bancária - TypeScript & POO
+
+## Simulador Educacional de Sistema Bancário | Portfólio Profissional
 
 <br />
 
@@ -11,47 +13,102 @@
 <div align="center">
     <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
     <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
-    <br />
-    <img src="https://img.shields.io/github/last-commit/juliana-barreto/conta-bancaria?style=flat-square&color=orange" />
-    <img src="https://img.shields.io/github/languages/count/juliana-barreto/conta-bancaria?style=flat-square&color=blue" />
-    <img src="https://img.shields.io/github/repo-size/juliana-barreto/conta-bancaria?style=flat-square&color=green" />
+    <img src="https://img.shields.io/badge/POO-Conceitos-orange?style=flat-square" />
+    <img src="https://img.shields.io/badge/Status-Concluído-brightgreen?style=flat-square" />
 </div>
 
 ---
 
-## Visão Geral do Projeto
+## Sobre o Projeto
 
-Este repositório hospeda a implementação de um sistema bancário simulado via console desenvolvido como projeto final do módulo de lógica de programação do Bootcamp Full Stack da [Generation Brasil](https://brazil.generation.org/).
+O **Projeto Conta Bancária** é uma aplicação desenvolvida em **TypeScript** com foco na consolidação de **Programação Orientada a Objetos (POO)** e arquitetura de software.
 
-O objetivo principal desta aplicação é consolidar os conhecimentos de **Programação Orientada a Objetos (POO)** utilizando **TypeScript**. Diferente de exercícios isolados de lógica, este projeto simula uma arquitetura de software real dividida em responsabilidades, onde o foco deixa de ser apenas a sintaxe e passa a ser a escalabilidade, a manutenção do código e a implementação de regras de negócio complexas.
+Diferente de exercícios isolados de lógica, este projeto simula uma estrutura real dividida em responsabilidades, onde o foco é a escalabilidade, manutenção de código e implementação de regras de negócio financeiras, como **CRUD de contas, transferências, depósitos e saques**.
 
-A aplicação gerencia o ciclo de vida de contas bancárias e permite a execução de operações financeiras essenciais através de um menu interativo, garantindo a integridade dos dados através de encapsulamento rigoroso e tipagem estática.
+## Funcionalidades e Regras de Negócio
 
-## Arquitetura e Conceitos Aplicados
+A aplicação gerencia o ciclo de vida de contas bancárias através de um menu interativo no console (CLI).
 
-O desenvolvimento foi estruturado para refletir a progressão das aulas de TypeScript (da Aula 03 em diante). Cada funcionalidade do banco foi desenhada para exercitar um pilar específico da orientação a objetos.
+| Funcionalidade | Status | Descrição |
+| :--- | :---: | :--- |
+| **CRUD de Contas** | ✅ | Criação, leitura, atualização e exclusão de contas em memória. |
+| **Tipos de Conta** | ✅ | Suporte a Conta Corrente (com limite) e Conta Poupança (com aniversário). |
+| **Transações** | ✅ | Depósitos, saques e transferências entre contas com validação de saldo. |
+| **Consultas** | ✅ | Busca de contas por número ou titular. |
+| **Validações** | ✅ | Tratamento de erros e exceções para impedir operações inválidas. |
 
-Abaixo apresento a correlação entre as regras de negócio implementadas e os conceitos técnicos abordados:
+## Arquitetura e Conceitos Técnicos (POO)
 
-| Componente Bancário | Regra de Negócio | Conceito Técnico (POO) |
+O desenvolvimento foi estruturado para demonstrar competência técnica na aplicação dos pilares da Orientação a Objetos. Abaixo, a correlação entre as regras de negócio e a solução técnica:
+
+| Componente Bancário | Regra de Negócio | Conceito Técnico Aplicado |
 | :--- | :--- | :--- |
-| **Conta (Genérica)** | Define o modelo base para qualquer conta, impedindo a criação de contas sem tipo específico. | [Classe Abstrata](https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-members) e Encapsulamento de atributos protegidos. |
-| **Conta Corrente** | Possui atributos exclusivos como limite de cheque especial e regras próprias de saque. | [Herança](https://www.typescriptlang.org/docs/handbook/2/classes.html#extends-clauses) e Sobrescrita de Métodos (`override`). |
-| **Repositório** | Define o contrato de métodos que o controlador deve obrigatoriamente implementar (CRUD). | [Interface](https://www.typescriptlang.org/docs/handbook/2/objects.html) e Abstração. |
-| **Controller** | Gerencia a lista de contas em memória e processa as operações solicitadas pelo usuário. | Implementação de Interface e Manipulação de Coleções. |
-| **Menu** | Interface de usuário via terminal para entrada e saída de dados. | Tratamento de exceções com `try/catch` para prevenir crash na aplicação. |
+| **Conta (Base)** | Define o modelo padrão. Não é possível instanciar uma conta genérica, apenas tipos específicos. | **Classe Abstrata** e Encapsulamento (`protected`). |
+| **Conta Corrente** | Possui atributos exclusivos (limite) e regra de saque específica (saldo + limite). | **Herança** (`extends`) e **Polimorfismo** (Sobrescrita de métodos). |
+| **Repositório** | Define o contrato obrigatório que o controlador deve seguir para gerenciar os dados. | **Interface** (`interface`) e Abstração. |
+| **Controller** | Gerencia a lista de contas e processa as operações solicitadas. | Implementação de Interface e Manipulação de Coleções. |
+| **Menu** | Interface de usuário para entrada e saída de dados. | Tratamento de Exceções (`try/catch`). |
 
-## Estrutura de Diretórios
+## Diagrama de Classes
 
-O projeto segue uma organização de pastas que separa a definição dos modelos (o que é uma conta) da regra de negócio (como a conta funciona) e da execução (menu).
+A estrutura das classes segue o padrão UML abaixo, evidenciando a herança e o encapsulamento:
 
-```text
-conta-bancaria/
-├── src/
-│   ├── model/           # Classes bases (Conta) e filhas (ContaCorrente, ContaPoupanca)
-│   ├── controller/      # Lógica de controle e implementação dos métodos da interface
-│   ├── repository/      # Interfaces que definem os contratos do sistema
-│   └── Menu.ts          # Ponto de entrada (Main) com a interface de usuário
-│
-├── package.json         # Dependências e scripts de execução
-└── tsconfig.json        # Configurações do compilador TypeScript
+```mermaid
+classDiagram
+class Conta {
+  - _numero: number
+  - _agencia: number
+  - _tipo: number
+  - _titular: string
+  - _saldo: number
+  + get numero() number
+  + get agencia() number
+  + get tipo() number
+  + get titular() string
+  + get saldo() number
+  + set numero(numero: number) void
+  + set agencia(agencia: number) void
+  + set tipo(tipo: number) void
+  + set titular(titular: string) void
+  + set saldo(saldo: number) void
+  + sacar(valor: number) boolean
+  + depositar(valor: number) void
+  + visualizar() void
+}
+class ContaCorrente {
+  - _limite: number
+  + get limite() number
+  + set limite(limite: number) void
+  + sacar(valor: number) boolean
+  + visualizar() void
+}
+class ContaPoupanca {
+  - _aniversario: number
+  + get aniversario() number
+  + set aniversario(aniversario: number) void
+  + visualizar() void
+}
+ContaCorrente --> Conta
+ContaPoupanca --> Conta
+```
+
+## Estrutura do Projeto
+A organização de pastas segue uma arquitetura em camadas para facilitar a manutenção e leitura técnica:
+ ┣ 📂 src
+ ┃ ┣ 📂 controller      # Regras de aplicação e gerenciamento de estados
+ ┃ ┣ 📂 model           # Entidades de domínio (Conta, ContaCorrente, etc.)
+ ┃ ┣ 📂 repository      # Interfaces (Contratos do sistema)
+ ┃ ┗ 📂 util            # Cores para o terminal e helpers
+ ┣ 📜 Menu.ts           # Ponto de entrada (Main)
+ ┗ 📜 tsconfig.json     # Configuração do compilador
+
+ ## Impacto Técnico e Métricas
+
+| Indicador | Detalhe |
+| :--- | :--- |
+| **Linhas de código** | +600 |
+| **Conceitos POO** | Herança, Polimorfismo, Encapsulamento, Abstração |
+| **Camadas** | Model, Repository, Controller, View (Console) |
+| **Persistência** | Simulada em memória (ArrayList/Collection) |
+
+<div align="center">Desenvolvido para fins de estudo e portfólio.</div>
