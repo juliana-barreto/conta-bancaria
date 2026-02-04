@@ -94,6 +94,7 @@ ContaPoupanca --> Conta
 
 ## Estrutura do Projeto
 A organização de pastas segue uma arquitetura em camadas para facilitar a manutenção e leitura técnica:
+```plaintext
  ┣ 📂 src
  ┃ ┣ 📂 controller      # Regras de aplicação e gerenciamento de estados
  ┃ ┣ 📂 model           # Entidades de domínio (Conta, ContaCorrente, etc.)
@@ -101,6 +102,7 @@ A organização de pastas segue uma arquitetura em camadas para facilitar a manu
  ┃ ┗ 📂 util            # Cores para o terminal e helpers
  ┣ 📜 Menu.ts           # Ponto de entrada (Main)
  ┗ 📜 tsconfig.json     # Configuração do compilador
+```
 
  ## Impacto Técnico e Métricas
 
