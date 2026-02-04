@@ -3,7 +3,10 @@
 
 > Implementação de sistema financeiro focada em escalabilidade, POO e arquitetura em camadas.
 
-![Language](https://img.shields.io/badge/language-TypeScript-blue) ![Environment](https://img.shields.io/badge/runtime-Node.js-green)
+<div align="center">
+  <img src="https://img.shields.io/badge/language-TypeScript-blue" />
+  <img src="https://img.shields.io/badge/runtime-Node.js-green" />
+</div>
 
 ---
 
