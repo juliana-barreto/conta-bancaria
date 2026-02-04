@@ -113,4 +113,19 @@ A organização de pastas segue uma arquitetura em camadas para facilitar a manu
 | **Camadas** | Model, Repository, Controller, View (Console) |
 | **Persistência** | Simulada em memória (ArrayList/Collection) |
 
+## Como Executar
+1. Clone o repositório:
+```Bash
+git clone [https://github.com/SEU-USUARIO/NOME-DO-REPO.git](https://github.com/SEU-USUARIO/NOME-DO-REPO.git)
+```
+2. Instale as dependências:
+```Bash
+npm install
+```
+3. Execute o projeto:
+```Bash
+npm start
+# ou
+ts-node src/Menu.ts
+```
 <div align="center">Desenvolvido para fins de estudo e portfólio.</div>
