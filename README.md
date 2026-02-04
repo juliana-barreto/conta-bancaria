@@ -1,13 +1,5 @@
 # Projeto Conta Bancária - TypeScript & POO
 
-## Simulador Educacional de Sistema Bancário | Portfólio Profissional
-
-<br />
-
-<div align="center">
-    <img src="https://i.imgur.com/izFuHID.png" title="Logo do Projeto" width="35%"/>
-</div>
-
 <br />
 
 <div align="center">
