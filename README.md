@@ -1,11 +1,9 @@
+
 # Projeto Conta Bancária
 
-<br />
+> Implementação de sistema financeiro focada em escalabilidade, POO e arquitetura em camadas.
 
-<div align="center">
-    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-    <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
-</div>
+![Language](https://img.shields.io/badge/language-TypeScript-blue) ![Environment](https://img.shields.io/badge/runtime-Node.js-green)
 
 ---
 
