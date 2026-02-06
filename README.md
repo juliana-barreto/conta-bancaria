@@ -40,49 +40,6 @@ O desenvolvimento foi estruturado para demonstrar competência técnica na aplic
 | **Controller** | Gerencia a lista de contas e processa as operações solicitadas. | Implementação de Interface e Manipulação de Coleções. |
 | **Menu** | Interface de usuário para entrada e saída de dados. | Tratamento de Exceções (`try/catch`). |
 
-## Diagrama de Classes
-
-A estrutura das classes segue o padrão UML abaixo, evidenciando a herança e o encapsulamento:
-
-```mermaid
-classDiagram
-class Conta {
-  - _numero: number
-  - _agencia: number
-  - _tipo: number
-  - _titular: string
-  - _saldo: number
-  + get numero() number
-  + get agencia() number
-  + get tipo() number
-  + get titular() string
-  + get saldo() number
-  + set numero(numero: number) void
-  + set agencia(agencia: number) void
-  + set tipo(tipo: number) void
-  + set titular(titular: string) void
-  + set saldo(saldo: number) void
-  + sacar(valor: number) boolean
-  + depositar(valor: number) void
-  + visualizar() void
-}
-class ContaCorrente {
-  - _limite: number
-  + get limite() number
-  + set limite(limite: number) void
-  + sacar(valor: number) boolean
-  + visualizar() void
-}
-class ContaPoupanca {
-  - _aniversario: number
-  + get aniversario() number
-  + set aniversario(aniversario: number) void
-  + visualizar() void
-}
-ContaCorrente --> Conta
-ContaPoupanca --> Conta
-```
-
 ## Estrutura do Projeto
 A organização de pastas segue uma arquitetura em camadas para facilitar a manutenção e leitura técnica:
 ```plaintext
