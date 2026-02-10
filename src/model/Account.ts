@@ -20,109 +20,108 @@ export abstract class Account {
 
   // Getters
 
-	public get number(): number {
-		return this._number;
-	}
+  public get number(): number {
+    return this._number;
+  }
 
-	public get branch(): number {
-		return this._branch;
-	}
+  public get branch(): number {
+    return this._branch;
+  }
 
-	public get holder(): string {
-		return this._holder;
-	}
+  public get holder(): string {
+    return this._holder;
+  }
 
-	public get type(): number {
-		return this._type;
-	}
+  public get type(): number {
+    return this._type;
+  }
 
-	public get balance(): number {
-		return this._balance;
-	}
+  public get balance(): number {
+    return this._balance;
+  }
 
   // Setters com validações
 
-	public set number(value: number) {
+  public set number(value: number) {
     if (value <= 0) {
       console.log(Colors.fg.red, "O número da conta deve ser positivo!", Colors.reset);
       return;
     }
-		this._number = value;
-	}
+    this._number = value;
+  }
 
-	public set branch(value: number) {
+  public set branch(value: number) {
     if (value <= 0) {
       console.log(Colors.fg.red, "O número da agência deve ser positivo!", Colors.reset);
       return;
     }
-		this._branch = value;
-	}
+    this._branch = value;
+  }
 
-	public set holder(value: string) {
-    if (value === "") {
-      console.log(Colors.fg.red, "O nome do titular não pode ser vazio!", Colors.reset);
+  public set holder(value: string) {
+    if (value === '') {
+      console.log(Colors.fg.red, 'O nome do titular não pode ser vazio!', Colors.reset);
       return;
     }
-		this._holder = value;
-	}
+    this._holder = value;
+  }
 
-	public set type(value: number) {
-    if (type !== 1 && type !== 2) {
-      console.log(Colors.fg.red, "O tipo da conta deve ser 1 ou 2!", Colors.reset);
+  public set type(value: number) {
+    if (value !== 1 && value !== 2) {
+      console.log(Colors.fg.red, 'O tipo da conta deve ser 1 ou 2!', Colors.reset);
       return;
     }
-		this._type = value;
-	}
+    this._type = value;
+  }
 
-	public set balance(value: number) {
+  public set balance(value: number) {
     if (value < 0) {
       console.log(Colors.fg.red, "O saldo não pode ser negativo!", Colors.reset);
       return;
     }
-		this._balance = value;
-	}
+    this._balance = value;
+  }
 
-//Métodos Auxiliares
-
-public withdraw(valor: number): boolean{
-
-    if(valor <= 0){
-        console.log(Colors.fg.red, "O valor deve ser positivo!", Colors.reset);
-        return false;
+  //Métodos Auxiliares
+  public withdraw(amount: number): boolean {
+    if (amount <= 0) {
+      console.log(Colors.fg.red, 'O valor deve ser positivo!', Colors.reset);
+      return false;
     }
 
-    if (valor > this._balance) {
-        console.log(Colors.fg.red, "Saldo insuficiente!", Colors.reset);
-        return false;
+    if (amount > this._balance) {
+      console.log(Colors.fg.red, 'Saldo insuficiente!', Colors.reset);
+      return false;
     }
-    
-    this._balance -= valor;
+
+    this._balance -= amount;
     return true;
-}
+  }
 
-public deposit(valor: number): void{
-    if (valor <= 0) {
-        console.log(Colors.fg.red, "Depósito inválido!", Colors.reset);
+  public deposit(amount: number): void {
+    if (amount <= 0) {
+      console.log(Colors.fg.red, 'Depósito inválido!', Colors.reset);
+      return;
     }
 
-    this._balance += valor;
-}
+    this._balance += amount;
+  }
 
-public view(): void{
+  public view(): void {
 
-    let tipo: string;
+    let accountType: string;
 
     switch (this._type) {
-        case 1:
-            tipo = "Conta Corrente";
-            break;
-        case 2:
-            tipo = "Conta Poupança";
-            break;
-    
-        default:
-            tipo = "Tipo inválido!";
-            break;
+      case 1:
+        accountType = 'Conta Corrente';
+        break;
+      case 2:
+        accountType = 'Conta Poupança';
+        break;
+
+      default:
+        accountType = 'Tipo inválido!';
+        break;
     }
 
     console.log("\n*****************************************************");
@@ -131,7 +130,7 @@ public view(): void{
     console.log(`Número da conta: ${this._number}`);
     console.log(`Número da agência: ${this._branch}`);
     console.log(`Nome do titular: ${this._holder}`);
-    console.log(`Tipo da conta: ${this._type}`);
+    console.log(`Tipo da conta: ${accountType}`);
     console.log(`Saldo: R$${this._balance.toFixed(2)}`);
     console.log("*****************************************************\n");
   }
