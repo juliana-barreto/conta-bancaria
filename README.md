@@ -40,6 +40,77 @@ O desenvolvimento foi estruturado para demonstrar competência técnica na aplic
 | **Controller** | Gerencia a lista de contas e processa as operações solicitadas. | Implementação de Interface e Manipulação de Coleções. |
 | **Menu** | Interface de usuário para entrada e saída de dados. | Tratamento de Exceções (`try/catch`). |
 
+## Diagrama de Classes e Relacionamentos
+
+```mermaid
+classDiagram
+    class Account {
+        <<Abstract>>
+        -_number: number
+        -_branch: number
+        -_holder: string
+        -_type: number
+        -_balance: number
+        +withdraw(amount: number): boolean
+        +deposit(amount: number): boolean
+        +view(): void
+        +get number(): number
+        +set number(value: number)
+    }
+
+    class CurrentAccount {
+        -_overdraftLimit: number
+        +withdraw(amount: number): boolean
+        +view(): void
+        +get overdraftLimit(): number
+        +set overdraftLimit(value: number)
+    }
+
+    class SavingsAccount {
+        -_interestDay: number
+        +view(): void
+        +get interestDay(): number
+        +set interestDay(value: number)
+    }
+
+    class AccountRepository {
+        <<Interface>>
+        +findByNumber(number: number): void
+        +listAll(): void
+        +create(account: Account): void
+        +update(account: Account): void
+        +delete(number: number): void
+        +withdraw(number: number, amount: number): void
+        +deposit(number: number, amount: number): void
+        +transfer(source: number, target: number, amount: number): void
+    }
+
+    class AccountController {
+        -accounts: Array~Account~
+        -nextNumber: number
+        +generateNumber(): number
+        +findInArray(number: number): Account
+        +findByNumber(number: number): void
+        +listAll(): void
+        +create(account: Account): void
+        +update(account: Account): void
+        +delete(number: number): void
+        +withdraw(number: number, amount: number): void
+        +deposit(number: number, amount: number): void
+        +transfer(source: number, target: number, amount: number): void
+    }
+
+    %% Relacionamentos de Herança (É um)
+    Account <|-- CurrentAccount
+    Account <|-- SavingsAccount
+
+    %% Relacionamento de Implementação (Realização)
+    AccountRepository <|.. AccountController
+
+    %% Relacionamento de Composição/Agregação (Tem muitos)
+    AccountController "1" o--> "*" Account : manages
+```
+
 ## Estrutura do Projeto
 A organização de pastas segue uma arquitetura em camadas para facilitar a manutenção e leitura técnica:
 ```plaintext
