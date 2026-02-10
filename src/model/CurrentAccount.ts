@@ -1,7 +1,7 @@
-import { Colors } from "../util/Colors";
-import { Account } from "./Account";
+import { Colors } from '../util/Colors';
+import { Account } from './Account';
 
-export class CheckingAccount extends Account {
+export class CurrentAccount extends Account {
 
   private _overdraftLimit: number;
 

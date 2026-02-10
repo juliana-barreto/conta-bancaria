@@ -1,5 +1,4 @@
-import { Colors } from "../util/Colors";
-import { Account } from "./Account";
+import { Account } from './Account';
 
 export class SavingsAccount extends Account {
 

@@ -1,4 +1,4 @@
-import { Colors } from "../util/Colors";
+import { Colors } from '../util/Colors';
 
 export abstract class Account {
 
@@ -44,7 +44,7 @@ export abstract class Account {
 
 	public set number(value: number) {
     if (value <= 0) {
-      console.log(Colors.fg.red, "O número da conta deve ser positivo!", Colors.reset);
+      console.log(Colors.fg.red, 'O número da conta deve ser positivo!', Colors.reset);
       return;
     }
 		this._number = value;
@@ -52,15 +52,15 @@ export abstract class Account {
 
 	public set branch(value: number) {
     if (value <= 0) {
-      console.log(Colors.fg.red, "O número da agência deve ser positivo!", Colors.reset);
+      console.log(Colors.fg.red, 'O número da agência deve ser positivo!', Colors.reset);
       return;
     }
 		this._branch = value;
 	}
 
 	public set holder(value: string) {
-    if (value === "") {
-      console.log(Colors.fg.red, "O nome do titular não pode ser vazio!", Colors.reset);
+    if (value === '') {
+      console.log(Colors.fg.red, 'O nome do titular não pode ser vazio!', Colors.reset);
       return;
     }
 		this._holder = value;
@@ -68,7 +68,11 @@ export abstract class Account {
 
 	public set type(value: number) {
     if (value !== 1 && value !== 2) {
+<<<<<<< Updated upstream
       console.log(Colors.fg.red, "O tipo da conta deve ser 1 ou 2!", Colors.reset);
+=======
+      console.log(Colors.fg.red, 'O tipo da conta deve ser 1 ou 2!', Colors.reset);
+>>>>>>> Stashed changes
       return;
     }
 		this._type = value;
@@ -76,7 +80,7 @@ export abstract class Account {
 
 	public set balance(value: number) {
     if (value < 0) {
-      console.log(Colors.fg.red, "O saldo não pode ser negativo!", Colors.reset);
+      console.log(Colors.fg.red, 'O saldo não pode ser negativo!', Colors.reset);
       return;
     }
 		this._balance = value;
@@ -85,6 +89,7 @@ export abstract class Account {
 //Métodos Auxiliares
 public withdraw(amount: number): boolean{
 
+<<<<<<< Updated upstream
   if(amount <= 0){
     console.log(Colors.fg.red, "O valor deve ser positivo!", Colors.reset);
     return false;
@@ -94,6 +99,19 @@ public withdraw(amount: number): boolean{
     console.log(Colors.fg.red, "Saldo insuficiente!", Colors.reset);
     return false;
   }
+=======
+public withdraw(amount: number): boolean{
+
+  if(amount <= 0){
+        console.log(Colors.fg.red, 'O valor deve ser positivo!', Colors.reset);
+        return false;
+    }
+
+  if (amount > this._balance) {
+        console.log(Colors.fg.red, 'Saldo insuficiente!', Colors.reset);
+        return false;
+    }
+>>>>>>> Stashed changes
     
   this._balance -= amount;
     return true;
@@ -101,14 +119,21 @@ public withdraw(amount: number): boolean{
 
 public deposit(amount: number): void{
   if (amount <= 0) {
+<<<<<<< Updated upstream
       console.log(Colors.fg.red, "Depósito inválido!", Colors.reset);
       return;
     }
+=======
+        console.log(Colors.fg.red, 'Depósito inválido!', Colors.reset);
+    }
+
+>>>>>>> Stashed changes
   this._balance += amount;
 }
 
 public view(): void{
 
+<<<<<<< Updated upstream
     let type: string;
 
     switch (this._type) {
@@ -121,17 +146,35 @@ public view(): void{
     
         default:
             type = "Tipo inválido!";
+=======
+  let accountType: string;
+
+    switch (this._type) {
+        case 1:
+      accountType = 'Conta Corrente';
+            break;
+        case 2:
+      accountType = 'Conta Poupança';
+            break;
+    
+        default:
+      accountType = 'Tipo inválido!';
+>>>>>>> Stashed changes
             break;
     }
 
-    console.log("\n*****************************************************");
-    console.log("                    DADOS DA CONTA                     ");
-    console.log("*****************************************************");
+    console.log('\n*****************************************************');
+    console.log('                    DADOS DA CONTA                     ');
+    console.log('*****************************************************');
     console.log(`Número da conta: ${this._number}`);
     console.log(`Número da agência: ${this._branch}`);
     console.log(`Nome do titular: ${this._holder}`);
+<<<<<<< Updated upstream
     console.log(`Tipo da conta: ${type}`);
+=======
+    console.log(`Tipo da conta: ${accountType}`);
+>>>>>>> Stashed changes
     console.log(`Saldo: R$${this._balance.toFixed(2)}`);
-    console.log("*****************************************************\n");
+    console.log('*****************************************************\n');
   }
 }

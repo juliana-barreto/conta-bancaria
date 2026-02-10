@@ -16,10 +16,10 @@ import * as iconv from 'iconv-lite';
 export class Input {
    
     /** Controla se já detectou o encoding (detecta apenas uma vez) */
-    private static configurado = false;
+    private static configured = false;
    
     /** Armazena o encoding do console (cp850, cp1252 ou utf8) */
-    private static encodingConsole: string = 'cp850';
+    private static consoleEncoding: string = 'cp850';
    
     /**
      * Detecta qual encoding o console do Windows está usando
@@ -31,40 +31,40 @@ export class Input {
      *
      * Esta detecção acontece apenas UMA vez (na primeira chamada)
      */
-    private static detectarEncoding(): void {
+    private static detectEncoding(): void {
        
         // Se já detectou antes, não faz novamente
-        if (this.configurado) return;
+        if (this.configured) return;
        
         // Só precisa detectar no Windows (Linux/Mac já usam UTF-8)
         if (process.platform === 'win32') {
             try {
                 // Executa o comando 'chcp' no Windows
                 const { execSync } = require('child_process');
-                const resultado = execSync('chcp', { encoding: 'utf8' }).toString();
+                const result = execSync('chcp', { encoding: 'utf8' }).toString();
                
                 // Extrai o número do code page (ex: "850" de "Página de código ativa: 850")
-                const match = resultado.match(/\d+/);
+                const match = result.match(/\d+/);
                
                 if (match) {
                     const codePage = match[0];
                    
                     // Define o encoding baseado no code page
-                    this.encodingConsole = codePage === '65001' ? 'utf8' :
+                    this.consoleEncoding = codePage === '65001' ? 'utf8' :
                                           codePage === '850' ? 'cp850' :
                                           codePage === '1252' ? 'cp1252' : `cp${codePage}`;
                 }
             } catch (error) {
                 // Se falhar, assume CP850 (padrão mais comum no Brasil)
-                this.encodingConsole = 'cp850';
+                this.consoleEncoding = 'cp850';
             }
         } else {
             // Linux/Mac sempre usam UTF-8
-            this.encodingConsole = 'utf8';
+            this.consoleEncoding = 'utf8';
         }
        
         // Marca como já configurado
-        this.configurado = true;
+        this.configured = true;
     }
    
     /**
@@ -79,28 +79,28 @@ export class Input {
      * 4. Retorna a string UTF-8 correta
      *
      */
-    static question(pergunta: string): string {
+    static question(question: string): string {
  
         // Detecta o encoding (só na primeira vez)
-        this.detectarEncoding();
+        this.detectEncoding();
        
         const readlinesync = require('readline-sync');
        
         // Se o console NÃO está em UTF-8, precisa converter
-        if (this.encodingConsole !== 'utf8') {
+        if (this.consoleEncoding !== 'utf8') {
  
             // Lê a resposta como 'binary' (bytes brutos em CP850)
-            const respostaRaw = readlinesync.question(pergunta, {
+            const rawAnswer = readlinesync.question(question, {
                 encoding: 'binary'
             });
            
             // Converte os bytes de CP850 → UTF-8
-            const buffer = Buffer.from(respostaRaw, 'binary');
-            return iconv.decode(buffer, this.encodingConsole);
+            const buffer = Buffer.from(rawAnswer, 'binary');
+            return iconv.decode(buffer, this.consoleEncoding);
  
         } else {
             // Console já está em UTF-8, lê direto
-            return readlinesync.question(pergunta);
+            return readlinesync.question(question);
         }
     }
  
@@ -110,11 +110,11 @@ export class Input {
      * USO: Para ler NÚMEROS INTEIROS (idade, quantidade, opção do menu)
      *
      */
-    static questionInt(pergunta: string): number {
+    static questionInt(question: string): number {
         const readlinesync = require('readline-sync');
  
         // Usa o método nativo do readline-sync que já faz todas as validações
-        return readlinesync.questionInt(pergunta, {
+        return readlinesync.questionInt(question, {
             limitMessage: "Digite um numero inteiro"
         });
     }
@@ -125,11 +125,11 @@ export class Input {
      * USO: Para ler NÚMEROS DECIMAIS (preço, saldo, nota)
      *
      */
-    static questionFloat(pergunta: string): number {
+    static questionFloat(question: string): number {
         const readlinesync = require('readline-sync');
  
         // Usa o método nativo do readline-sync que já faz todas as validações
-        return readlinesync.questionFloat(pergunta, {
+        return readlinesync.questionFloat(question, {
             limitMessage: "Digite um numero decimal"
         });
     }
@@ -140,10 +140,10 @@ export class Input {
      * USO: Para campos SELECT (escolher entre várias opções)
      *
      */
-    static keyInSelect(opcoes: string[], pergunta: string, config?: any): number {
+    static keyInSelect(options: string[], question: string, config?: any): number {
         const readlinesync = require('readline-sync');
  
-        return readlinesync.keyInSelect(opcoes, pergunta, config);
+        return readlinesync.keyInSelect(options, question, config);
     }
  
     /**
@@ -165,9 +165,9 @@ export class Input {
      *
      */
     static getEncoding(): string {
-        this.detectarEncoding();
+        this.detectEncoding();
  
-        return this.encodingConsole;
+        return this.consoleEncoding;
     }
 }
  
