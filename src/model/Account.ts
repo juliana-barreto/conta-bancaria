@@ -1,4 +1,5 @@
 import { Colors } from "../util/Colors";
+import { formatCurrency } from "../util/Currency";
 
 export abstract class Account {
 
@@ -98,13 +99,14 @@ export abstract class Account {
     return true;
   }
 
-  public deposit(amount: number): void {
+  public deposit(amount: number): boolean {
     if (amount <= 0) {
       console.log(Colors.fg.red, 'Depósito inválido!', Colors.reset);
-      return;
+      return false;
     }
 
     this._balance += amount;
+    return true;
   }
 
   public view(): void {
@@ -131,7 +133,7 @@ export abstract class Account {
     console.log(`Número da agência: ${this._branch}`);
     console.log(`Nome do titular: ${this._holder}`);
     console.log(`Tipo da conta: ${accountType}`);
-    console.log(`Saldo: R$${this._balance.toFixed(2)}`);
+    console.log(`Saldo: ${formatCurrency(this._balance)}`);
     console.log("*****************************************************\n");
   }
 }
