@@ -69,6 +69,7 @@ export abstract class Account {
 	public set type(value: number) {
     if (value !== 1 && value !== 2) {
 <<<<<<< Updated upstream
+    if (value !== 1 && value !== 2) {
       console.log(Colors.fg.red, "O tipo da conta deve ser 1 ou 2!", Colors.reset);
 =======
       console.log(Colors.fg.red, 'O tipo da conta deve ser 1 ou 2!', Colors.reset);
@@ -104,9 +105,15 @@ public withdraw(amount: number): boolean{
 
   if(amount <= 0){
         console.log(Colors.fg.red, 'O valor deve ser positivo!', Colors.reset);
+public withdraw(amount: number): boolean{
+
+  if(amount <= 0){
+        console.log(Colors.fg.red, "O valor deve ser positivo!", Colors.reset);
         return false;
     }
 
+  if (amount > this._balance) {
+        console.log(Colors.fg.red, "Saldo insuficiente!", Colors.reset);
   if (amount > this._balance) {
         console.log(Colors.fg.red, 'Saldo insuficiente!', Colors.reset);
         return false;
@@ -114,9 +121,13 @@ public withdraw(amount: number): boolean{
 >>>>>>> Stashed changes
     
   this._balance -= amount;
+  this._balance -= amount;
     return true;
 }
 
+public deposit(amount: number): void{
+  if (amount <= 0) {
+        console.log(Colors.fg.red, "Depósito inválido!", Colors.reset);
 public deposit(amount: number): void{
   if (amount <= 0) {
 <<<<<<< Updated upstream
@@ -127,12 +138,14 @@ public deposit(amount: number): void{
         console.log(Colors.fg.red, 'Depósito inválido!', Colors.reset);
     }
 
+  this._balance += amount;
 >>>>>>> Stashed changes
   this._balance += amount;
 }
 
 public view(): void{
 
+  let accountType: string;
 <<<<<<< Updated upstream
     let type: string;
 
@@ -152,14 +165,17 @@ public view(): void{
     switch (this._type) {
         case 1:
       accountType = 'Conta Corrente';
+            accountType = "Conta Corrente";
             break;
         case 2:
       accountType = 'Conta Poupança';
+            accountType = "Conta Poupança";
             break;
     
         default:
       accountType = 'Tipo inválido!';
 >>>>>>> Stashed changes
+            accountType = "Tipo inválido!";
             break;
     }
 
@@ -174,6 +190,7 @@ public view(): void{
 =======
     console.log(`Tipo da conta: ${accountType}`);
 >>>>>>> Stashed changes
+    console.log(`Tipo da conta: ${accountType}`);
     console.log(`Saldo: R$${this._balance.toFixed(2)}`);
     console.log('*****************************************************\n');
   }

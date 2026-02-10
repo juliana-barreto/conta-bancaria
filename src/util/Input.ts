@@ -41,10 +41,10 @@ export class Input {
             try {
                 // Executa o comando 'chcp' no Windows
                 const { execSync } = require('child_process');
-                const result = execSync('chcp', { encoding: 'utf8' }).toString();
+                const output = execSync('chcp', { encoding: 'utf8' }).toString();
                
                 // Extrai o número do code page (ex: "850" de "Página de código ativa: 850")
-                const match = result.match(/\d+/);
+                const match = output.match(/\d+/);
                
                 if (match) {
                     const codePage = match[0];
@@ -79,7 +79,7 @@ export class Input {
      * 4. Retorna a string UTF-8 correta
      *
      */
-    static question(question: string): string {
+    static question(prompt: string): string {
  
         // Detecta o encoding (só na primeira vez)
         this.detectEncoding();
@@ -90,7 +90,7 @@ export class Input {
         if (this.consoleEncoding !== 'utf8') {
  
             // Lê a resposta como 'binary' (bytes brutos em CP850)
-            const rawAnswer = readlinesync.question(question, {
+            const rawAnswer = readlinesync.question(prompt, {
                 encoding: 'binary'
             });
            
@@ -100,7 +100,7 @@ export class Input {
  
         } else {
             // Console já está em UTF-8, lê direto
-            return readlinesync.question(question);
+            return readlinesync.question(prompt);
         }
     }
  
@@ -110,11 +110,11 @@ export class Input {
      * USO: Para ler NÚMEROS INTEIROS (idade, quantidade, opção do menu)
      *
      */
-    static questionInt(question: string): number {
+    static questionInt(prompt: string): number {
         const readlinesync = require('readline-sync');
  
         // Usa o método nativo do readline-sync que já faz todas as validações
-        return readlinesync.questionInt(question, {
+        return readlinesync.questionInt(prompt, {
             limitMessage: "Digite um numero inteiro"
         });
     }
@@ -125,11 +125,11 @@ export class Input {
      * USO: Para ler NÚMEROS DECIMAIS (preço, saldo, nota)
      *
      */
-    static questionFloat(question: string): number {
+    static questionFloat(prompt: string): number {
         const readlinesync = require('readline-sync');
  
         // Usa o método nativo do readline-sync que já faz todas as validações
-        return readlinesync.questionFloat(question, {
+        return readlinesync.questionFloat(prompt, {
             limitMessage: "Digite um numero decimal"
         });
     }
@@ -140,10 +140,10 @@ export class Input {
      * USO: Para campos SELECT (escolher entre várias opções)
      *
      */
-    static keyInSelect(options: string[], question: string, config?: any): number {
+    static keyInSelect(options: string[], prompt: string, config?: any): number {
         const readlinesync = require('readline-sync');
  
-        return readlinesync.keyInSelect(options, question, config);
+        return readlinesync.keyInSelect(options, prompt, config);
     }
  
     /**
