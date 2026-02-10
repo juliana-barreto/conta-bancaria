@@ -20,18 +20,18 @@ export class CheckingAccount extends Account {
 
   // Métodos sobrescritos
 
-  public withdraw(valor: number): boolean {
+  public withdraw(amount: number): boolean {
 
-      if (valor <= 0) {
+      if (amount <= 0) {
           console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
           return false;
       }
 
-      if (valor > this.balance + this._overdraftLimit) {
+      if (amount > this.balance + this._overdraftLimit) {
           console.log(Colors.fg.red, "Saldo Insuficiente! ", Colors.reset);
           return false;
       }
-      this.balance -= valor;
+      this.balance -= amount;
       return true;
   }
 

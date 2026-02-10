@@ -67,7 +67,7 @@ export abstract class Account {
 	}
 
 	public set type(value: number) {
-    if (type !== 1 && type !== 2) {
+    if (value !== 1 && value !== 2) {
       console.log(Colors.fg.red, "O tipo da conta deve ser 1 ou 2!", Colors.reset);
       return;
     }
@@ -83,45 +83,44 @@ export abstract class Account {
 	}
 
 //Métodos Auxiliares
+public withdraw(amount: number): boolean{
 
-public withdraw(valor: number): boolean{
+  if(amount <= 0){
+    console.log(Colors.fg.red, "O valor deve ser positivo!", Colors.reset);
+    return false;
+  }
 
-    if(valor <= 0){
-        console.log(Colors.fg.red, "O valor deve ser positivo!", Colors.reset);
-        return false;
-    }
-
-    if (valor > this._balance) {
-        console.log(Colors.fg.red, "Saldo insuficiente!", Colors.reset);
-        return false;
-    }
+  if (amount > this._balance) {
+    console.log(Colors.fg.red, "Saldo insuficiente!", Colors.reset);
+    return false;
+  }
     
-    this._balance -= valor;
+  this._balance -= amount;
     return true;
 }
 
-public deposit(valor: number): void{
-    if (valor <= 0) {
-        console.log(Colors.fg.red, "Depósito inválido!", Colors.reset);
+public deposit(amount: number): void{
+  if (amount <= 0) {
+      console.log(Colors.fg.red, "Depósito inválido!", Colors.reset);
+      return;
     }
-
-    this._balance += valor;
+  this._balance += amount;
 }
 
 public view(): void{
 
-    let tipo: string;
+    let type: string;
 
     switch (this._type) {
         case 1:
-            tipo = "Conta Corrente";
+            type = "Conta Corrente";
             break;
         case 2:
-            tipo = "Conta Poupança";
+            type = "Conta Poupança";
             break;
     
         default:
-            tipo = "Tipo inválido!";
+            type = "Tipo inválido!";
             break;
     }
 
@@ -131,7 +130,7 @@ public view(): void{
     console.log(`Número da conta: ${this._number}`);
     console.log(`Número da agência: ${this._branch}`);
     console.log(`Nome do titular: ${this._holder}`);
-    console.log(`Tipo da conta: ${this._type}`);
+    console.log(`Tipo da conta: ${type}`);
     console.log(`Saldo: R$${this._balance.toFixed(2)}`);
     console.log("*****************************************************\n");
   }
